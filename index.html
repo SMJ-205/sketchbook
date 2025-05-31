@@ -36,27 +36,39 @@
   />
   <div id="status">Tap The Baby : <span id="tapCount">0</span>/500</div>
 
+  <!-- 🔊 Audio element with new pop sound -->
+  <audio id="tapSound" preload="auto">
+    <source src="https://www.fesliyanstudios.com/play-mp3/6672" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
   <script>
     let tapCount = 0;
     const requiredTaps = 500;
     const image = document.getElementById('babyImage');
     const status = document.getElementById('status');
     const tapCountEl = document.getElementById('tapCount');
+    const tapSound = document.getElementById('tapSound');
 
     function registerTap() {
       if (tapCount >= requiredTaps) return;
+
+      // Play sound
+      tapSound.currentTime = 0;
+      tapSound.play();
+
       tapCount++;
       tapCountEl.textContent = tapCount;
 
       if (tapCount >= requiredTaps) {
         image.src = "https://static.vecteezy.com/system/resources/thumbnails/042/681/782/small_2x/illustration-of-cute-cartoon-goat-on-white-vector.jpg";
-        status.textContent = "1 Pcs";
+        status.textContent = "1 Pcs. Mohon doanya untuk kelancaran semua urusan adiknya Alma ya";
       }
     }
 
     image.addEventListener('click', registerTap);
     image.addEventListener('touchstart', function(e) {
-      e.preventDefault(); // Prevent zoom on mobile
+      e.preventDefault();
       registerTap();
     });
   </script>
