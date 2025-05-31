@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tap The Baby up to 500x to Reveal The Gender</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #babyImage {
+      width: 80%;
+      max-width: 300px;
+      transition: filter 0.5s ease;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      touch-action: manipulation;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <img
+    id="babyImage"
+    src="https://t4.ftcdn.net/jpg/01/27/35/67/360_F_127356701_Ivkl3qTj1VxFFUGAypEBikvKRxTyEOmN.jpg"
+    alt="Baby"
+  />
+  <div id="status">Tap The Baby : <span id="tapCount">0</span>/500</div>
+
+  <script>
+    let tapCount = 0;
+    const requiredTaps = 500;
+    const image = document.getElementById('babyImage');
+    const status = document.getElementById('status');
+    const tapCountEl = document.getElementById('tapCount');
+
+    function registerTap() {
+      if (tapCount >= requiredTaps) return;
+      tapCount++;
+      tapCountEl.textContent = tapCount;
+
+      if (tapCount >= requiredTaps) {
+        image.src = "https://static.vecteezy.com/system/resources/thumbnails/042/681/782/small_2x/illustration-of-cute-cartoon-goat-on-white-vector.jpg";
+        status.textContent = "1 Pcs";
+      }
+    }
+
+    image.addEventListener('click', registerTap);
+    image.addEventListener('touchstart', function(e) {
+      e.preventDefault(); // Prevent zoom on mobile
+      registerTap();
+    });
+  </script>
+
+</body>
+</html>
