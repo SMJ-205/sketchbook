@@ -25,6 +25,14 @@
       font-size: 18px;
       font-weight: bold;
     }
+
+    canvas.confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
@@ -36,11 +44,14 @@
   />
   <div id="status">Tap The Baby : <span id="tapCount">0</span>/500</div>
 
-  <!-- 🔊 Audio element with new pop sound -->
+  <!-- 🔊 Audio element -->
   <audio id="tapSound" preload="auto">
     <source src="https://www.fesliyanstudios.com/play-mp3/512" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
+
+  <!-- 🎉 Confetti library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
     let tapCount = 0;
@@ -50,10 +61,33 @@
     const tapCountEl = document.getElementById('tapCount');
     const tapSound = document.getElementById('tapSound');
 
+    function launchConfetti() {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
     function registerTap() {
       if (tapCount >= requiredTaps) return;
 
-      // Play sound
       tapSound.currentTime = 0;
       tapSound.play();
 
@@ -63,6 +97,7 @@
       if (tapCount >= requiredTaps) {
         image.src = "https://i.pinimg.com/564x/e4/bb/bb/e4bbbbc7669d41c5ad40e93fca611eaa.jpg";
         status.textContent = "It's a Girl. Mohon doa untuk kelancaran semua urusan adiknya Alma ya =)";
+        launchConfetti(); // 🎉 Launch confetti
       }
     }
 
