@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tap The Baby 500x for Gender Reveal</title>
+  <title>Tap The Baby up to 500x to Reveal The Gender</title>
   <style>
     body {
       background-color: #f9f9f9;
@@ -44,13 +44,19 @@
   />
   <div id="status">Tap The Baby : <span id="tapCount">0</span>/500</div>
 
-  <!-- 🔊 Audio element -->
+  <!-- 🔊 Tap sound -->
   <audio id="tapSound" preload="auto">
     <source src="https://www.fesliyanstudios.com/play-mp3/512" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- 🎉 Confetti library from CDN -->
+  <!-- 🔊 Gender reveal sound -->
+  <audio id="genderRevealSound" preload="auto">
+    <source src="https://files.chosic.com/download-mp3/59608/" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🎉 Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
@@ -60,9 +66,10 @@
     const status = document.getElementById('status');
     const tapCountEl = document.getElementById('tapCount');
     const tapSound = document.getElementById('tapSound');
+    const genderSound = document.getElementById('genderRevealSound');
 
     function launchConfetti() {
-      const duration = 4 * 1000;
+      const duration = 3 * 1000;
       const end = Date.now() + duration;
 
       (function frame() {
@@ -97,7 +104,8 @@
       if (tapCount >= requiredTaps) {
         image.src = "https://i.pinimg.com/564x/e4/bb/bb/e4bbbbc7669d41c5ad40e93fca611eaa.jpg";
         status.textContent = "It's a Girl. Mohon doa untuk kelancaran semua urusan adiknya Alma ya =)";
-        launchConfetti(); // 🎉 Launch confetti
+        launchConfetti();
+        genderSound.play(); // 🔊 Play the gender reveal sound
       }
     }
 
