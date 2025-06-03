@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tap The Baby up to 500x to Reveal The Gender</title>
+  <title>Tap The Baby 500x for Gender Reveal</title>
   <style>
     body {
       background-color: #f9f9f9;
@@ -49,11 +49,12 @@
     <source src="https://www.fesliyanstudios.com/play-mp3/512" type="audio/mp3">
   </audio>
 
-  <!-- 🔊 Gender reveal sound -->
+  <!-- 🔊 Gender reveal sound (Carefree by Kevin MacLeod) -->
   <audio id="genderRevealSound" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b6a5f45f7.mp3?filename=peaceful-ambient-piano-11257.mp3" type="audio/mp3">
+    <source src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3" type="audio/mp3">
   </audio>
 
+  <!-- 🎉 Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
@@ -101,10 +102,10 @@
       if (tapCount >= requiredTaps) {
         image.src = "https://i.pinimg.com/564x/e4/bb/bb/e4bbbbc7669d41c5ad40e93fca611eaa.jpg";
         status.textContent = "It's a Girl. Mohon doa untuk kelancaran semua urusan adiknya Alma ya =)";
-        document.body.style.backgroundColor = "#ffe6f0"; // baby pink 🎀
+        document.body.style.backgroundColor = "#ffe6f0"; // baby pink background
         launchConfetti();
         genderSound.currentTime = 0;
-        genderSound.play();
+        genderSound.play(); // Play reveal music
       }
     }
 
