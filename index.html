@@ -3,13 +3,14 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tap The Baby 500x for Gender Reveal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
@@ -18,6 +19,14 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+    }
+
+    #announcement {
+      display: none;
+      font-size: 28px;
+      color: #e91e63; /* pink */
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
     #babyImage {
@@ -31,8 +40,9 @@
 
     #status {
       margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 16px;
+      font-weight: 400;
+      max-width: 80%;
     }
 
     canvas.confetti-canvas {
@@ -46,6 +56,8 @@
 </head>
 <body>
 
+  <div id="announcement">It's a Girl</div>
+
   <img
     id="babyImage"
     src="https://t4.ftcdn.net/jpg/01/27/35/67/360_F_127356701_Ivkl3qTj1VxFFUGAypEBikvKRxTyEOmN.jpg"
@@ -58,7 +70,7 @@
     <source src="https://www.fesliyanstudios.com/play-mp3/512" type="audio/mp3">
   </audio>
 
-  <!-- 🔊 Gender reveal sound (Carefree by Kevin MacLeod) -->
+  <!-- 🔊 Gender reveal sound -->
   <audio id="genderRevealSound" preload="auto">
     <source src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3" type="audio/mp3">
   </audio>
@@ -74,6 +86,7 @@
     const tapCountEl = document.getElementById('tapCount');
     const tapSound = document.getElementById('tapSound');
     const genderSound = document.getElementById('genderRevealSound');
+    const announcement = document.getElementById('announcement');
 
     function launchConfetti() {
       const duration = 4 * 1000;
@@ -110,7 +123,8 @@
 
       if (tapCount >= requiredTaps) {
         image.src = "https://i.pinimg.com/564x/e4/bb/bb/e4bbbbc7669d41c5ad40e93fca611eaa.jpg";
-        status.textContent = "It's a Girl. Mohon doa untuk kelancaran semua urusan adiknya Alma ya =)";
+        announcement.style.display = "block";
+        status.textContent = "Mohon doa untuk kelancaran semua urusan adiknya Alma ya =)";
         document.body.style.backgroundColor = "#ffe6f0"; // baby pink background
         launchConfetti();
         genderSound.currentTime = 0;
